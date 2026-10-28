@@ -1,0 +1,11 @@
+export enum EmailStatus {
+  PENDING = "PENDING",
+  SENT = "SENT",
+  FAILED = "FAILED",
+}
+export enum EmailType {
+  CONFIRM_EMAIL = "CONFIRM_EMAIL",
+  RESET_PASSWORD = "RESET_PASSWORD",
+  WELCOME = "WELCOME",
+  TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH",
+}
