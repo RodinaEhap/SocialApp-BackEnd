@@ -9,16 +9,19 @@ const loginBodySchema = (lang: languageEnum) => {
   });
 };
 export const login = (lang: languageEnum) => {
-  return loginBodySchema(lang); 
+  return z.object({
+    body: loginBodySchema(lang),
+  });
 };
 
 export const confirmEmail = (lang: languageEnum) => {
-  return z.strictObject({
-    email: generalValidationFields.email(lang),
-    otp: generalValidationFields.otp(lang),
-  }); 
+  return z.object({
+    body: z.strictObject({
+      email: generalValidationFields.email(lang),
+      otp: generalValidationFields.otp(lang),
+    }),
+  });
 };
-
 
 export const signup = (lang: languageEnum) => {
   return z.object({
@@ -55,6 +58,35 @@ export const refreshToken = (lang: languageEnum) => {
           lang === languageEnum.AR
             ? "مطلوب Refresh Token"
             : "Refresh token is required",
+      }),
+    }),
+  });
+};
+export const forgotPassword = (lang: languageEnum) => {
+  return z.object({
+    body: z.strictObject({
+      email: generalValidationFields.email(lang),
+    }),
+  });
+};
+
+export const resetPassword = (lang: languageEnum) => {
+  return z.object({
+    body: z.strictObject({
+      email: generalValidationFields.email(lang),
+      otp: generalValidationFields.otp(lang),
+      password: generalValidationFields.password(lang),
+    }),
+  });
+};
+export const googleLogin = (lang: languageEnum) => {
+  return z.object({
+    body: z.strictObject({
+      idToken: z.string().min(1, {
+        message:
+          lang === languageEnum.AR
+            ? "مطلوب توكن من جوجل"
+            : "Google ID token is required",
       }),
     }),
   });

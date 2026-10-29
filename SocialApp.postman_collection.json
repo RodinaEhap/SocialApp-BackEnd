@@ -1,0 +1,550 @@
+{
+  "info": {
+    "_postman_id": "37ddae6b-b565-4c22-aecd-ce2fd9994c59",
+    "name": "SocialApp",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52882823",
+    "_collection_link": "https://go.postman.co/collection/52882823-37ddae6b-b565-4c22-aecd-ce2fd9994c59?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "signup",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "name": "cache-control",
+                "sortOrder": 2,
+                "infoTitle": "We recommend using this header",
+                "info": "Postman added \"Cache-Control: no-cache\" as a precautionary measure to prevent the server from returning stale response when one makes repeated requests.\n\nYou can remove this header in the app settings or enter a new one with a different value.",
+                "allowedToToggle": false,
+                "disableEdit": true,
+                "previewSettingsLink": "Go to settings",
+                "key": "Cache-Control",
+                "value": "no-cache",
+                "system": true,
+                "type": "text"
+              },
+              {
+                "name": "postman-token",
+                "sortOrder": 3,
+                "infoTitle": "We recommend using this header",
+                "info": "The Postman-Token header appends a random UUID to every outgoing request. Postman adds this header for API developers to better debug requests sent and to ensure separate requests appear distinct to the receiving server.\n\nYou can remove this header in the app settings.",
+                "allowedToToggle": false,
+                "disableEdit": true,
+                "previewSettingsLink": "Go to settings",
+                "key": "Postman-Token",
+                "value": "<calculated when request is sent>",
+                "system": true,
+                "type": "text"
+              },
+              {
+                "name": "content-type",
+                "sortOrder": 4,
+                "infoTitle": "This header was automatically added",
+                "info": "The Content-Type header is added to help the server identify the media type of the request body that is present in this request.\n\nUse the request body tab to control the value or to remove this header.",
+                "allowedToToggle": true,
+                "disableEdit": true,
+                "previewSettingsLink": "Go to body",
+                "key": "Content-Type",
+                "value": "application/json",
+                "system": true,
+                "type": "text"
+              },
+              {
+                "name": "content-length",
+                "sortOrder": 5,
+                "infoTitle": "This header was automatically added",
+                "info": "The Content-Length header was added to indicate to the server the size of the request body that is added to this request. Server uses this value to parse the request body accurately.\n\nYou can remove the header or enter a new one with a different value.",
+                "allowedToToggle": true,
+                "disableEdit": true,
+                "previewSettingsLink": "Go to body",
+                "key": "Content-Length",
+                "value": "<calculated when request is sent>",
+                "system": true,
+                "type": "text"
+              },
+              {
+                "name": "host",
+                "sortOrder": 6,
+                "infoTitle": "We recommend using this header",
+                "info": "The Host header is added to identify the domain name for which a request is being sent to the server. This header is implicitly sent by every HTTP client.\n\nYou can remove the header or enter a new one with a different value. It is most likely that without this header, your request will return an HTTP 400 error.",
+                "allowedToToggle": true,
+                "disableEdit": true,
+                "key": "Host",
+                "value": "<calculated when request is sent>",
+                "system": true,
+                "type": "text"
+              },
+              {
+                "name": "user-agent",
+                "sortOrder": 7,
+                "infoTitle": "We recommend using this header",
+                "info": "The User-Agent header is added to help the server identify Postman as the HTTP requesting application or client.\n\nIt is recommended that this header be sent, but you can remove the header or enter a new one with a different value.",
+                "allowedToToggle": true,
+                "disableEdit": true,
+                "key": "User-Agent",
+                "value": "PostmanRuntime/7.56.3",
+                "system": true,
+                "type": "text"
+              },
+              {
+                "name": "accept",
+                "sortOrder": 8,
+                "infoTitle": "We recommend using this header",
+                "info": "The \"Accept: */*\" header is added to tell the server that Postman can understand and process all forms of response content types.\n\nIt is recommended that this header be sent, but you can remove the header or enter a new one with a different value.",
+                "allowedToToggle": true,
+                "disableEdit": true,
+                "key": "Accept",
+                "value": "*/*",
+                "system": true,
+                "type": "text"
+              },
+              {
+                "name": "accept-encoding",
+                "sortOrder": 9,
+                "infoTitle": "We recommend using this header",
+                "info": "The Accept-Encoding header is added to indicate to the server that Postman HTTP client supports a defined list of content-encoding or compression algorithms as response.\n\nYou can remove the header or enter a new one with a different value. Doing that may not accurately render the response within the app.",
+                "allowedToToggle": true,
+                "disableEdit": true,
+                "key": "Accept-Encoding",
+                "value": "gzip, deflate, br",
+                "system": true,
+                "type": "text"
+              },
+              {
+                "name": "connection",
+                "sortOrder": 10,
+                "infoTitle": "We recommend using this header",
+                "info": "Postman added the Connection header to indicate the server to keep the underlying network connection open once the current response is received. This allows Postman to reuse the same connection for faster response times in subsequent requests to the same server.\n\nYou can remove this header or enter a new one with a different value, such as `Connection: Close` to control this behaviour.",
+                "allowedToToggle": true,
+                "disableEdit": true,
+                "key": "Connection",
+                "value": "keep-alive",
+                "system": true,
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text",
+                "id": 0
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"Rodina New\",\r\n  \"email\": \"tisirey188@37xiao.com\",\r\n  \"password\": \"Password123!\",\r\n  \"confirmPassword\": \"Password123!\",\r\n  \"phone\": \"01012345678\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/signup",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "signup"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\"email\": \"tisirey188@37xiao.com\",\r\n  \"password\": \"Password123!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Confirm Email",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"tisirey188@37xiao.com\",\r\n  \"otp\": \"737671\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/confirm-email",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "confirm-email"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "\r\n{\r\n \"refreshToken\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWUzNWM2Nzg2MzI1MTBhYjVjZDVjYTEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc5MzI4NTMyOCwiZXhwIjoxNzkzODkwMTI4fQ.AITRtJ94XZYvdhe6WulUfEB7AhQvkvk5LRIUC2IdVKA\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/refresh-token",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "refresh-token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GoogleLogin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"idToken\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk0M2EzYTVkN2Q5MTk2MjVhNDU0ZTQ4OWI3NWMyOWFkYWI1N2FjYmEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI0MDc0MDg3MTgxOTIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI0MDc0MDg3MTgxOTIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTA3MjQ3OTk4NTE4MDQyODc5OTUiLCJlbWFpbCI6InJvZWhhYjU1NTVAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJacnVOZ0NwQWRRZGxGQU0xRER0Y2FBIiwibmFtZSI6IlJvZGluYSBFaGFiIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0tpOFJaSnNXczBFcHhJdW5RTmNFUUs0cEVoX2FoZktRUmdqUjBIeFpTbkxWV3FNeGZ1PXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6IlJvZGluYSIsImZhbWlseV9uYW1lIjoiRWhhYiIsImlhdCI6MTc5MzI4NDAzMywiZXhwIjoxNzkzMjg3NjMzfQ.RWlus4N1BTaxKjzYCeVb9Lx7LIedl0amLmurAj56nwDRiAjuuyxshXzEv3FvolTKB2uHEMyQ4srhNZSbh-0mzKsW9MZIwfyGU6rE5hUIPBb16oDExkvdmb6UGtqmRlg3jGJA1F6O1CuKQAADlyzleSXhfGMyyRu_VLTc0KIGyNFsstbu1XKCm8_LgGz0r7KjpYtZKsMWXzX8pL5dwQUJ-cHfU_1wIJAnQ8Ox0HyC1E-CuOOwAbhuDrD2NYIV_yf7yznH9uApO40yt3-fYdXVftYc8uYglK98sc4qIgytuxLL5nEjIz0T89W4dGIUuzC8Utn7uw3gAABQbe4ymQWhfQ\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/google-login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "google-login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"tisirey188@37xiao.com\"\r\n  \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/forgot-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "forgot-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"tisirey188@37xiao.com\",\r\n  \"otp\": \"731018\",\r\n  \"password\": \"NewPassword123!\"\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/reset-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "reset-password"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWUzNjM1OGQzYzFjOTA1ZWVkMzMxNTEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc5MzI4NzA2NSwiZXhwIjoxNzkzMzczNDY1fQ.oAH93Z1dGUlqXPU4-KXe5DqOewgkg-oA4rxf8Y43Vyo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWUzNjM1OGQzYzFjOTA1ZWVkMzMxNTEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc5MzI4NzA2NSwiZXhwIjoxNzkzMzczNDY1fQ.oAH93Z1dGUlqXPU4-KXe5DqOewgkg-oA4rxf8Y43Vyo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"username\": \"Rodina Updated\", \"phone\": \"01099999999\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/update-profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "update-profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWUzNjM1OGQzYzFjOTA1ZWVkMzMxNTEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc5MzI4NzA2NSwiZXhwIjoxNzkzMzczNDY1fQ.oAH93Z1dGUlqXPU4-KXe5DqOewgkg-oA4rxf8Y43Vyo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"oldPassword\": \"NewPassword123!\", \"password\": \"BrandNewPassword456!\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/change-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "change-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Follow / Unfollow User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWUzNjM1OGQzYzFjOTA1ZWVkMzMxNTEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc5MzI4NzA2NSwiZXhwIjoxNzkzMzczNDY1fQ.oAH93Z1dGUlqXPU4-KXe5DqOewgkg-oA4rxf8Y43Vyo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/follow/6ae35c678632510ab5cd5ca1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "follow",
+                "6ae35c678632510ab5cd5ca1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Users",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWUzNjM1OGQzYzFjOTA1ZWVkMzMxNTEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc5MzI4NzA2NSwiZXhwIjoxNzkzMzczNDY1fQ.oAH93Z1dGUlqXPU4-KXe5DqOewgkg-oA4rxf8Y43Vyo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/search?keyword=Rodina New",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "Rodina New"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User Suggestions",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWUzNjM1OGQzYzFjOTA1ZWVkMzMxNTEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc5MzI4NzA2NSwiZXhwIjoxNzkzMzczNDY1fQ.oAH93Z1dGUlqXPU4-KXe5DqOewgkg-oA4rxf8Y43Vyo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/suggestions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "suggestions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Privacy Control",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWUzNjM1OGQzYzFjOTA1ZWVkMzMxNTEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc5MzI4NzA2NSwiZXhwIjoxNzkzMzczNDY1fQ.oAH93Z1dGUlqXPU4-KXe5DqOewgkg-oA4rxf8Y43Vyo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/privacy",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "privacy"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

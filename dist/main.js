@@ -6,11 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const authentication_router_1 = __importDefault(require("./modules/authentication/authentication.router"));
 const db_service_1 = require("./DB/db.service");
+const user_router_1 = __importDefault(require("./modules/user/user.router"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 app.use(express_1.default.json());
+app.use("/api/users", user_router_1.default);
 app.use("/api/auth", authentication_router_1.default);
 app.get("/", (req, res) => {
     res.json({ message: "Server is running successfully!" });

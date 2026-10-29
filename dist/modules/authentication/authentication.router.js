@@ -46,4 +46,7 @@ router.post("/signup", (0, middleware_1.validationMiddleware)(validators.signup(
 router.post("/confirm-email", (0, middleware_1.validationMiddleware)(validators.confirmEmail(enum_1.languageEnum.EN)), authentication_controller_1.default.confirmEmail);
 router.post("/login", (0, middleware_1.validationMiddleware)(validators.login(enum_1.languageEnum.EN)), authentication_controller_1.default.login);
 router.post("/refresh-token", (0, middleware_1.validationMiddleware)(validators.refreshToken(enum_1.languageEnum.EN)), authentication_controller_1.default.refreshToken);
+router.post("/forgot-password", (0, middleware_1.validationMiddleware)(validators.forgotPassword(enum_1.languageEnum.EN)), authentication_controller_1.default.forgotPassword);
+router.post("/reset-password", (0, middleware_1.validationMiddleware)(validators.resetPassword(enum_1.languageEnum.EN)), authentication_controller_1.default.resetPassword);
+router.post("/google-login", (0, middleware_1.validationMiddleware)(validators.googleLogin(enum_1.languageEnum.EN)), authentication_controller_1.default.googleLogin);
 exports.default = router;

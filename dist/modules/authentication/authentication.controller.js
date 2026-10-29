@@ -51,6 +51,39 @@ class AuthenticationController {
                 .json({ message: error.message || "Invalid refresh token!" });
         }
     };
+    forgotPassword = async (req, res) => {
+        try {
+            const result = await authentication_service_1.default.forgotPassword(req.body);
+            return res.status(200).json(result);
+        }
+        catch (error) {
+            return res
+                .status(400)
+                .json({ message: error.message || "Something went wrong!" });
+        }
+    };
+    resetPassword = async (req, res) => {
+        try {
+            const result = await authentication_service_1.default.resetPassword(req.body);
+            return res.status(200).json(result);
+        }
+        catch (error) {
+            return res
+                .status(400)
+                .json({ message: error.message || "Something went wrong!" });
+        }
+    };
+    googleLogin = async (req, res) => {
+        try {
+            const result = await authentication_service_1.default.googleLogin(req.body);
+            return res.status(200).json(result);
+        }
+        catch (error) {
+            return res
+                .status(400)
+                .json({ message: error.message || "Something went wrong!" });
+        }
+    };
 }
 exports.AuthenticationController = AuthenticationController;
 exports.default = new AuthenticationController();
