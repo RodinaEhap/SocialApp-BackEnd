@@ -3,12 +3,18 @@ import authRouter from "./modules/authentication/authentication.router";
 import { connectDB } from "./DB/db.service";
 import userRouter from "./modules/user/user.router"
 import dotenv from "dotenv";
+import postRouter from "./modules/post/post.router";
+import commentRouter from "./modules/comment/comment.router";
+import notificationRouter from "./modules/notification/notification.router";
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/posts", postRouter);
+app.use("/api/comments", commentRouter);
+app.use("/api/notifications", notificationRouter);
 app.get("/", (req: Request, res: Response) => {
   res.json({ message: "Server is running successfully!" });
 });

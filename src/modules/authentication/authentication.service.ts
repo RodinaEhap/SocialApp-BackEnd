@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 import { comparePassword, hashPassword } from "../../common/utlis/hash";
 import { OAuth2Client } from "google-auth-library";
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-
 export class AuthenticationService {
   constructor() {}
   signup = async (data: ISignupDto) => {

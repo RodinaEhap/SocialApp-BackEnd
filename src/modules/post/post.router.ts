@@ -1,0 +1,12 @@
+import { Router } from "express";
+import { authMiddleware } from "../../middleware";
+import postController from "./post.controller";
+const router = Router();
+router.post("/", authMiddleware, postController.createPost);
+router.get("/", authMiddleware, postController.getAllPosts);
+router.get("/feed", authMiddleware, postController.getFeedPosts);
+router.get("/:postId", authMiddleware, postController.getSinglePost);
+router.patch("/:postId", authMiddleware, postController.updatePost);
+router.delete("/:postId", authMiddleware, postController.deletePost);
+router.patch("/:postId/like", authMiddleware, postController.toggleLikePost);
+export default router;
