@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const user_model_1 = __importDefault(require("../../DB/model/user.model"));
 const hash_1 = require("../../common/utlis/hash");
+const s3_service_1 = __importDefault(require("../S3/s3.service"));
 class UserService {
     constructor() { }
     getProfile = async (userId) => {
@@ -110,6 +111,24 @@ class UserService {
         return {
             message: `Account privacy updated successfully. Profile is now ${user.isPrivate ? "Private" : "Public"}`,
             isPrivate: user.isPrivate,
+        };
+    };
+    updateProfileImage = async (userId, file) => {
+        const user = await user_model_1.default.findById(userId);
+        if (!user)
+            throw new Error("User not found!");
+        const uploaded = await s3_service_1.default.uploadAsset(file, "users");
+        if (user.profileImage) {
+            const oldKey = user.profileImage.split("://")[1];
+            if (oldKey) {
+                await s3_service_1.default.deleteAsset(oldKey).catch(() => null);
+            }
+        }
+        user.profileImage = uploaded.url;
+        await user.save();
+        return {
+            message: "Profile image updated successfully",
+            profileImage: user.profileImage,
         };
     };
 }

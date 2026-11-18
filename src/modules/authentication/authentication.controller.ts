@@ -68,11 +68,27 @@ export class AuthenticationController {
         .json({ message: error.message || "Something went wrong!" });
     }
   };
-  
+
   googleLogin = async (req: Request, res: Response) => {
     try {
       const result = await authenticationService.googleLogin(req.body);
       return res.status(200).json(result);
+    } catch (error: any) {
+      return res
+        .status(400)
+        .json({ message: error.message || "Something went wrong!" });
+    }
+  };
+
+  logout = async (req: Request, res: Response) => {
+    try {
+      const userId = req.user?.userId;
+      if (!userId) {
+        return res.status(401).json({ message: "Unauthorized!!!!!" });
+      }
+      const { fcmToken } = req.body;
+      const result = await authenticationService.logout(userId, fcmToken);
+      return res.status(200).json({ message: "Success", result });
     } catch (error: any) {
       return res
         .status(400)

@@ -9,8 +9,8 @@ class DBRepository {
     async create(data) {
         return await this.model.create(data);
     }
-    async findOne(filter) {
-        return await this.model.findOne(filter);
+    async findOne(filter, options) {
+        return await this.model.findOne(filter, null, options);
     }
     async findById(id) {
         return await this.model.findById(id);
@@ -21,7 +21,10 @@ class DBRepository {
     async findByIdAndUpdate(id, update) {
         return await this.model.findByIdAndUpdate(id, update, { new: true });
     }
-    async findOneAndDelete(filter) {
+    async softDelete(filter) {
+        return await this.model.findOneAndUpdate(filter, { isDeleted: true, deletedAt: new Date() }, { new: true });
+    }
+    async forceDelete(filter) {
         return await this.model.findOneAndDelete(filter);
     }
 }

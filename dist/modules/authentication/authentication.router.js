@@ -41,6 +41,7 @@ const authentication_controller_1 = __importDefault(require("./authentication.co
 const validators = __importStar(require("./authentication.validation"));
 const enum_1 = require("../../common/enum");
 const middleware_1 = require("../../middleware");
+const authentication_controller_2 = __importDefault(require("./authentication.controller"));
 const router = (0, express_1.Router)();
 router.post("/signup", (0, middleware_1.validationMiddleware)(validators.signup(enum_1.languageEnum.EN)), authentication_controller_1.default.signup);
 router.post("/confirm-email", (0, middleware_1.validationMiddleware)(validators.confirmEmail(enum_1.languageEnum.EN)), authentication_controller_1.default.confirmEmail);
@@ -49,4 +50,5 @@ router.post("/refresh-token", (0, middleware_1.validationMiddleware)(validators.
 router.post("/forgot-password", (0, middleware_1.validationMiddleware)(validators.forgotPassword(enum_1.languageEnum.EN)), authentication_controller_1.default.forgotPassword);
 router.post("/reset-password", (0, middleware_1.validationMiddleware)(validators.resetPassword(enum_1.languageEnum.EN)), authentication_controller_1.default.resetPassword);
 router.post("/google-login", (0, middleware_1.validationMiddleware)(validators.googleLogin(enum_1.languageEnum.EN)), authentication_controller_1.default.googleLogin);
+router.post("/logout", middleware_1.authMiddleware, authentication_controller_2.default.logout);
 exports.default = router;

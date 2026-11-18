@@ -4,32 +4,41 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostService = void 0;
-const notification_model_1 = require("../../DB/model/notification.model");
 const post_model_1 = require("../../DB/model/post.model");
 const user_model_1 = __importDefault(require("../../DB/model/user.model"));
+const notification_service_1 = __importDefault(require("../notification/notification.service"));
+const s3_service_1 = __importDefault(require("../S3/s3.service"));
 class PostService {
-    createPost = async (userId, data) => {
+    createPost = async (userId, data, file) => {
+        if (file) {
+            const uploaded = await s3_service_1.default.uploadAsset(file, "posts");
+            data.image = uploaded.url;
+        }
         const post = await post_model_1.Post.create({ ...data, createdBy: userId });
         return { message: "Post created successfully", post };
     };
     getAllPosts = async () => {
         const posts = await post_model_1.Post.find()
-            .populate("createdBy", "username email profilePicture")
+            .populate("createdBy", "username email profileImage")
             .sort({ createdAt: -1 });
         return { message: "Success", posts };
     };
     getSinglePost = async (postId) => {
-        const post = await post_model_1.Post.findById(postId).populate("createdBy", "username email profilePicture");
+        const post = await post_model_1.Post.findById(postId).populate("createdBy", "username email profileImage");
         if (!post)
             throw new Error("Post not found!");
         return { message: "Success", post };
     };
-    updatePost = async (userId, postId, data) => {
+    updatePost = async (userId, postId, data, file) => {
         const post = await post_model_1.Post.findById(postId);
         if (!post)
             throw new Error("Post not found!");
         if (post.createdBy.toString() !== userId) {
             throw new Error("Unauthorized! You can only update your own post.");
+        }
+        if (file) {
+            const uploaded = await s3_service_1.default.uploadAsset(file, "posts");
+            data.image = uploaded.url;
         }
         const updatedPost = await post_model_1.Post.findByIdAndUpdate(postId, data, {
             returnDocument: "after",
@@ -44,7 +53,7 @@ class PostService {
         const posts = await post_model_1.Post.find({
             createdBy: { $in: [...followingList, userId] },
         })
-            .populate("createdBy", "username email profilePicture")
+            .populate("createdBy", "username email profileImage")
             .sort({ createdAt: -1 });
         return { message: "Success", posts };
     };
@@ -58,14 +67,13 @@ class PostService {
             return { message: "Post unliked successfully" };
         }
         else {
-            await post_model_1.Post.findByIdAndUpdate(postId, { $push: { likes: userId } });
+            await post_model_1.Post.findByIdAndUpdate(postId, { $addToSet: { likes: userId } });
             if (post.createdBy.toString() !== userId) {
-                await notification_model_1.Notification.create({
-                    recipient_id: post.createdBy,
-                    sender_id: userId,
-                    type: "like",
-                    target_id: postId,
-                });
+                const postOwner = await user_model_1.default.findById(post.createdBy);
+                const liker = await user_model_1.default.findById(userId);
+                if (postOwner) {
+                    await notification_service_1.default.sendPushNotification(postOwner._id.toString(), postOwner.fcmTokens || [], "New Like!", `${liker?.username || "Someone"} liked your post`, { type: "like", postId: postId.toString() });
+                }
             }
             return { message: "Post liked successfully" };
         }
@@ -77,7 +85,7 @@ class PostService {
         if (post.createdBy.toString() !== userId) {
             throw new Error("Unauthorized! You can only delete your own post.");
         }
-        await post_model_1.Post.findByIdAndDelete(postId);
+        await post_model_1.Post.findByIdAndUpdate(postId, { isDeleted: true });
         return { message: "Post deleted successfully" };
     };
 }

@@ -1,38 +1,38 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CommentService = void 0;
 const comment_model_1 = require("../../DB/model/comment.model");
-const notification_model_1 = require("../../DB/model/notification.model");
 const post_model_1 = require("../../DB/model/post.model");
+const user_model_1 = __importDefault(require("../../DB/model/user.model"));
+const notification_service_1 = __importDefault(require("../notification/notification.service"));
 class CommentService {
     createComment = async (userId, postId, content) => {
         const post = await post_model_1.Post.findById(postId);
         if (!post)
             throw new Error("Post not found!");
-        if (post.createdBy.toString() !== userId) {
-            await notification_model_1.Notification.create({
-                recipient_id: post.createdBy,
-                sender_id: userId,
-                type: "comment",
-                target_id: postId,
-            });
-        }
         const comment = await comment_model_1.Comment.create({
             content,
             postId,
             createdBy: userId,
         });
+        if (post.createdBy.toString() !== userId) {
+            const commenter = await user_model_1.default.findById(userId);
+            const postOwner = await user_model_1.default.findById(post.createdBy);
+            await notification_service_1.default.sendPushNotification(post.createdBy.toString(), postOwner?.fcmTokens || [], "New Comment!", `${commenter?.username || "Someone"} commented on your post`, { type: "comment", postId: postId.toString() });
+        }
         return { message: "Comment added successfully", comment };
     };
-    ;
     getPostComments = async (postId) => {
         const comments = await comment_model_1.Comment.find({ postId })
-            .populate("createdBy", "username email profilePicture")
+            .populate("createdBy", "username email profileImage")
             .sort({ createdAt: -1 });
         return { message: "Success", comments };
     };
     getSingleComment = async (commentId) => {
-        const comment = await comment_model_1.Comment.findById(commentId).populate("createdBy", "username email profilePicture");
+        const comment = await comment_model_1.Comment.findById(commentId).populate("createdBy", "username email profileImage");
         if (!comment)
             throw new Error("Comment not found!");
         return { message: "Success", comment };

@@ -5,10 +5,9 @@ const userSchema = new mongoose_1.Schema({
     username: { type: String, required: true, minlength: 2 },
     email: { type: String, required: true, unique: true, lowercase: true },
     password: { type: String, required: true },
-    phone: {
-        type: String,
-        required: true,
-    },
+    phone: { type: String, required: true },
+    profileImage: { type: String },
+    fcmTokens: [{ type: String }],
     confirmEmail: { type: Boolean, default: false },
     otp: { type: String },
     otpExpireTime: { type: Date },
@@ -16,6 +15,14 @@ const userSchema = new mongoose_1.Schema({
     followers: [{ type: mongoose_1.Schema.Types.ObjectId, ref: "User" }],
     following: [{ type: mongoose_1.Schema.Types.ObjectId, ref: "User" }],
     isPrivate: { type: Boolean, default: false },
+    isDeleted: { type: Boolean, default: false },
+    deletedAt: { type: Date },
+    changeCredentialsTime: { type: Date },
 }, { timestamps: true });
+userSchema.pre(/^find/, function () {
+    if (!this.getOptions().includeDeleted) {
+        this.where({ isDeleted: { $ne: true } });
+    }
+});
 const User = (0, mongoose_1.model)("User", userSchema);
 exports.default = User;

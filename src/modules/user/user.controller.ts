@@ -77,12 +77,30 @@ export class UserController {
         .json({ message: error.message || "Something went wrong!" });
     }
   };
-  
+
   toggleAccountPrivacy = async (req: any, res: Response) => {
     try {
       const userId = req.user?.userId || req.userId;
       const result = await userService.toggleAccountPrivacy(userId);
       return res.status(200).json(result);
+    } catch (error: any) {
+      return res
+        .status(400)
+        .json({ message: error.message || "Something went wrong!" });
+    }
+  };
+
+  updateProfileImage = async (req: Request, res: Response) => {
+    try {
+      const userId = req.user?.userId;
+      if (!userId) {
+        return res.status(401).json({ message: "Unauthorized!!!!!" });
+      }
+      if (!req.file) {
+        return res.status(400).json({ message: "Image file is required!!!!!" });
+      }
+      const result = await userService.updateProfileImage(userId, req.file);
+      return res.status(200).json({ message: "Success", result });
     } catch (error: any) {
       return res
         .status(400)

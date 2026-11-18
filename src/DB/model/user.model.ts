@@ -1,10 +1,11 @@
 import { Schema, model, Document, Types } from "mongoose";
-
 export interface IUser extends Document {
   username: string;
   email: string;
   password: string;
   phone?: string;
+  profileImage?: string;
+  fcmTokens: string[];
   confirmEmail: boolean;
   otp?: string;
   otpExpireTime?: Date;
@@ -12,17 +13,18 @@ export interface IUser extends Document {
   followers: Types.ObjectId[];
   following: Types.ObjectId[];
   isPrivate: boolean;
+  isDeleted: boolean;
+  deletedAt?: Date;
+  changeCredentialsTime?: Date;
 }
-
 const userSchema = new Schema<IUser>(
   {
     username: { type: String, required: true, minlength: 2 },
     email: { type: String, required: true, unique: true, lowercase: true },
     password: { type: String, required: true },
-    phone: {
-      type: String,
-      required: true,
-    },
+    phone: { type: String, required: true },
+    profileImage: { type: String },
+    fcmTokens: [{ type: String }],
     confirmEmail: { type: Boolean, default: false },
     otp: { type: String },
     otpExpireTime: { type: Date },
@@ -30,9 +32,16 @@ const userSchema = new Schema<IUser>(
     followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
     following: [{ type: Schema.Types.ObjectId, ref: "User" }],
     isPrivate: { type: Boolean, default: false },
+    isDeleted: { type: Boolean, default: false },
+    deletedAt: { type: Date },
+    changeCredentialsTime: { type: Date },
   },
   { timestamps: true },
 );
-
+userSchema.pre(/^find/, function (this: any) {
+  if (!this.getOptions().includeDeleted) {
+    this.where({ isDeleted: { $ne: true } });
+  }
+});
 const User = model<IUser>("User", userSchema);
 export default User;

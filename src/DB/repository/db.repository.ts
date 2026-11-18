@@ -4,8 +4,8 @@ export class DBRepository<T> {
   async create(data: any) {
     return await this.model.create(data);
   }
-  async findOne(filter: any) {
-    return await this.model.findOne(filter);
+  async findOne(filter: any, options?: any) {
+    return await this.model.findOne(filter, null, options);
   }
   async findById(id: string) {
     return await this.model.findById(id);
@@ -13,12 +13,17 @@ export class DBRepository<T> {
   async findOneAndUpdate(filter: any, update: any) {
     return await this.model.findOneAndUpdate(filter, update, { new: true });
   }
-
   async findByIdAndUpdate(id: string, update: any) {
     return await this.model.findByIdAndUpdate(id, update, { new: true });
   }
-
-  async findOneAndDelete(filter: any) {
+  async softDelete(filter: any) {
+    return await this.model.findOneAndUpdate(
+      filter,
+      { isDeleted: true, deletedAt: new Date() },
+      { new: true },
+    );
+  }
+  async forceDelete(filter: any) {
     return await this.model.findOneAndDelete(filter);
   }
 }

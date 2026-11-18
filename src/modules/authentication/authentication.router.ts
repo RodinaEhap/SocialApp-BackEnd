@@ -2,7 +2,8 @@ import { Router } from "express";
 import authController from "./authentication.controller";
 import * as validators from "./authentication.validation";
 import { languageEnum } from "../../common/enum";
-import { validationMiddleware } from "../../middleware";
+import { authMiddleware, validationMiddleware } from "../../middleware";
+import authenticationController from "./authentication.controller";
 
 const router = Router();
 router.post(
@@ -46,4 +47,5 @@ router.post(
   authController.googleLogin,
 );
 
+router.post("/logout", authMiddleware, authenticationController.logout);
 export default router;

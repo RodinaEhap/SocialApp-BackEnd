@@ -22,3 +22,4 @@ var notification_controller_1 = require("./notification.controller");
 Object.defineProperty(exports, "commentController", { enumerable: true, get: function () { return __importDefault(notification_controller_1).default; } });
 __exportStar(require("./notification.router"), exports);
 __exportStar(require("./notification.service"), exports);
+__exportStar(require("./notification.dto"), exports);

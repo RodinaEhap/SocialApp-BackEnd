@@ -3,6 +3,7 @@ import User from "../../DB/model/user.model";
 import jwt from "jsonwebtoken";
 import { comparePassword, hashPassword } from "../../common/utlis/hash";
 import { OAuth2Client } from "google-auth-library";
+import notificationService from "../notification/notification.service";
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 export class AuthenticationService {
   constructor() {}
@@ -52,7 +53,6 @@ export class AuthenticationService {
 
     return { message: "Email confirmed successfully" };
   };
-
   login = async (data: { email: string; password: string }) => {
     const user = await User.findOne({ email: data.email });
     if (!user) {
@@ -79,7 +79,6 @@ export class AuthenticationService {
 
     return { message: "Logged in successfully", accessToken, refreshToken };
   };
-
   refreshToken = async (token: string) => {
     if (!token) {
       throw new Error("Refresh token is required!");
@@ -99,7 +98,6 @@ export class AuthenticationService {
 
     return { message: "Token refreshed successfully!", accessToken };
   };
-
   forgotPassword = async (data: { email: string }) => {
     const { email } = data;
     const user = await User.findOne({ email });
@@ -120,9 +118,9 @@ export class AuthenticationService {
   resetPassword = async (data: {
     email: string;
     otp: string;
-    password: string; 
+    password: string;
   }) => {
-    const { email, otp, password } = data; 
+    const { email, otp, password } = data;
     const user = await User.findOne({ email });
     if (!user) {
       throw new Error("User not found!");
@@ -134,7 +132,7 @@ export class AuthenticationService {
     if (user.otpExpireTime && new Date() > user.otpExpireTime) {
       throw new Error("OTP has expired!");
     }
-    const hashedPassword = await hashPassword(password); 
+    const hashedPassword = await hashPassword(password);
     await User.findOneAndUpdate(
       { email },
       {
@@ -145,7 +143,6 @@ export class AuthenticationService {
 
     return { message: "Password reset successfully" };
   };
-
   googleLogin = async (data: { idToken: string }) => {
     const { idToken } = data;
     const ticket = await client.verifyIdToken({
@@ -182,6 +179,15 @@ export class AuthenticationService {
     );
 
     return { message: "Google login successful", accessToken, refreshToken };
+  };
+  logout = async (userId: string, fcmToken?: string) => {
+    await User.findByIdAndUpdate(userId, {
+      changeCredentialsTime: new Date(),
+    });
+    if (fcmToken) {
+      await notificationService.removeFcmToken(userId, fcmToken);
+    }
+    return { message: "Logged out successfully!" };
   };
 } 
 

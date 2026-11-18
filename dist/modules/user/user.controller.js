@@ -91,6 +91,24 @@ class UserController {
                 .json({ message: error.message || "Something went wrong!" });
         }
     };
+    updateProfileImage = async (req, res) => {
+        try {
+            const userId = req.user?.userId;
+            if (!userId) {
+                return res.status(401).json({ message: "Unauthorized!!!!!" });
+            }
+            if (!req.file) {
+                return res.status(400).json({ message: "Image file is required!!!!!" });
+            }
+            const result = await user_service_1.default.updateProfileImage(userId, req.file);
+            return res.status(200).json({ message: "Success", result });
+        }
+        catch (error) {
+            return res
+                .status(400)
+                .json({ message: error.message || "Something went wrong!" });
+        }
+    };
 }
 exports.UserController = UserController;
 exports.default = new UserController();

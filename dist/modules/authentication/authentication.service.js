@@ -8,6 +8,7 @@ const user_model_1 = __importDefault(require("../../DB/model/user.model"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const hash_1 = require("../../common/utlis/hash");
 const google_auth_library_1 = require("google-auth-library");
+const notification_service_1 = __importDefault(require("../notification/notification.service"));
 const client = new google_auth_library_1.OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 class AuthenticationService {
     constructor() { }
@@ -134,6 +135,15 @@ class AuthenticationService {
         const accessToken = jsonwebtoken_1.default.sign({ userId: user._id, role: user.role }, process.env.TOKEN_SIGNIN_SECRET_KEY || "access_secret", { expiresIn: "1d" });
         const refreshToken = jsonwebtoken_1.default.sign({ userId: user._id, role: user.role }, process.env.REFRESH_TOKEN_SECRET_KEY || "refresh_secret", { expiresIn: "7d" });
         return { message: "Google login successful", accessToken, refreshToken };
+    };
+    logout = async (userId, fcmToken) => {
+        await user_model_1.default.findByIdAndUpdate(userId, {
+            changeCredentialsTime: new Date(),
+        });
+        if (fcmToken) {
+            await notification_service_1.default.removeFcmToken(userId, fcmToken);
+        }
+        return { message: "Logged out successfully!" };
     };
 }
 exports.AuthenticationService = AuthenticationService;

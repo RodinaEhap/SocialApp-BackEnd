@@ -9,7 +9,10 @@ class PostController {
     createPost = async (req, res) => {
         try {
             const userId = req.user?.userId;
-            const result = await post_service_1.default.createPost(userId, req.body);
+            if (!userId) {
+                return res.status(401).json({ message: "Unauthorized!!!!!" });
+            }
+            const result = await post_service_1.default.createPost(userId, req.body, req.file);
             return res.status(201).json(result);
         }
         catch (error) {
@@ -43,8 +46,12 @@ class PostController {
     updatePost = async (req, res) => {
         try {
             const userId = req.user?.userId;
-            const result = await post_service_1.default.updatePost(userId, req.params.postId, req.body);
-            return res.status(200).json(result);
+            if (!userId) {
+                return res.status(401).json({ message: "Unauthorized!!!!!" });
+            }
+            const { postId } = req.params;
+            const result = await post_service_1.default.updatePost(userId, postId, req.body, req.file);
+            return res.status(200).json({ message: "Success", result });
         }
         catch (error) {
             return res
@@ -55,6 +62,9 @@ class PostController {
     getFeedPosts = async (req, res) => {
         try {
             const userId = req.user?.userId;
+            if (!userId) {
+                return res.status(401).json({ message: "Unauthorized!!!!!" });
+            }
             const result = await post_service_1.default.getFeedPosts(userId);
             return res.status(200).json(result);
         }
@@ -67,6 +77,9 @@ class PostController {
     toggleLikePost = async (req, res) => {
         try {
             const userId = req.user?.userId;
+            if (!userId) {
+                return res.status(401).json({ message: "Unauthorized!!!!!" });
+            }
             const { postId } = req.params;
             const result = await post_service_1.default.toggleLikePost(userId, postId);
             return res.status(200).json(result);
@@ -80,6 +93,9 @@ class PostController {
     deletePost = async (req, res) => {
         try {
             const userId = req.user?.userId;
+            if (!userId) {
+                return res.status(401).json({ message: "Unauthorized!!!!!" });
+            }
             const result = await post_service_1.default.deletePost(userId, req.params.postId);
             return res.status(200).json(result);
         }

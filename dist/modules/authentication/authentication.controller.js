@@ -84,6 +84,22 @@ class AuthenticationController {
                 .json({ message: error.message || "Something went wrong!" });
         }
     };
+    logout = async (req, res) => {
+        try {
+            const userId = req.user?.userId;
+            if (!userId) {
+                return res.status(401).json({ message: "Unauthorized!!!!!" });
+            }
+            const { fcmToken } = req.body;
+            const result = await authentication_service_1.default.logout(userId, fcmToken);
+            return res.status(200).json({ message: "Success", result });
+        }
+        catch (error) {
+            return res
+                .status(400)
+                .json({ message: error.message || "Something went wrong!" });
+        }
+    };
 }
 exports.AuthenticationController = AuthenticationController;
 exports.default = new AuthenticationController();

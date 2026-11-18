@@ -1,5 +1,6 @@
 import User from "../../DB/model/user.model";
 import { hashPassword, comparePassword } from "../../common/utlis/hash";
+import s3Service from "../S3/s3.service";
 
 export class UserService {
   constructor() {}
@@ -123,6 +124,25 @@ export class UserService {
     return {
       message: `Account privacy updated successfully. Profile is now ${user.isPrivate ? "Private" : "Public"}`,
       isPrivate: user.isPrivate,
+    };
+  };
+
+  updateProfileImage = async (userId: string, file: Express.Multer.File) => {
+    const user = await User.findById(userId);
+    if (!user) throw new Error("User not found!");
+    const uploaded = await s3Service.uploadAsset(file, "users");
+    if (user.profileImage) {
+      const oldKey = user.profileImage.split("://")[1];
+      if (oldKey) {
+        await s3Service.deleteAsset(oldKey).catch(() => null);
+      }
+    }
+    user.profileImage = uploaded.url;
+    await user.save();
+
+    return {
+      message: "Profile image updated successfully",
+      profileImage: user.profileImage,
     };
   };
 }

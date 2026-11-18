@@ -1,7 +1,7 @@
 import { Router } from "express";
 import userController from "./user.controller";
 import { authMiddleware } from "../../middleware/authentication.middleware";
-
+import { uploadCloud } from "../../middleware";
 const router = Router();
 router.get("/profile", authMiddleware, userController.getProfile);
 router.patch("/update-profile", authMiddleware, userController.updateProfile);
@@ -14,4 +14,10 @@ router.patch(
 router.get("/search", authMiddleware, userController.searchUsers);
 router.get("/suggestions", authMiddleware, userController.getSuggestions);
 router.patch("/privacy", authMiddleware, userController.toggleAccountPrivacy);
+router.patch(
+  "/profile-image",
+  authMiddleware,
+  uploadCloud.single("image"),
+  userController.updateProfileImage,
+);
 export default router;
