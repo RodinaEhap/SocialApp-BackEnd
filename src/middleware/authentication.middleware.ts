@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import User from "../DB/model/user.model";
+import { getRequiredEnv } from "../common/utlis/environment";
 declare global {
   namespace Express {
     interface Request {
@@ -29,7 +30,7 @@ export const authMiddleware = async (
       res.status(401).json({ message: "Access denied. Token missing!!!!!" });
       return;
     }
-    const secretKey = process.env.TOKEN_SIGNIN_SECRET_KEY || "access_secret";
+    const secretKey = getRequiredEnv("TOKEN_SIGNIN_SECRET_KEY");
     const decoded = jwt.verify(token, secretKey) as unknown as {
       userId: string;
       role: string;

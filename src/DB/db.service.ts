@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
+import { getRequiredEnv } from "../common/utlis/environment";
 export const connectDB = async () => {
   try {
     await mongoose.connect(
-      process.env.DB_URI || "mongodb://localhost:27017/myDB",
+      getRequiredEnv("DB_URI"),
     );
     console.log("Database Connected Successfully");
   } catch (error) {

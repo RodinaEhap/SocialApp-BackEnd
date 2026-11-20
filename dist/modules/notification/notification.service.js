@@ -14,7 +14,12 @@ const initFirebase = () => {
     const projectId = process.env.FIREBASE_PROJECT_ID;
     const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
     const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n");
-    if (!projectId || !clientEmail || !privateKey) {
+    const values = [projectId, clientEmail, privateKey];
+    const hasPlaceholder = values.some((value) => value?.includes("your_") || value?.includes("-----BEGIN PRIVATE KEY-----\n..."));
+    if (!projectId ||
+        !clientEmail ||
+        !privateKey ||
+        hasPlaceholder) {
         console.warn("Firebase credentials missing in .env! Push notifications disabled.");
         return false;
     }
@@ -29,7 +34,7 @@ const initFirebase = () => {
 };
 class NotificationService {
     async saveFcmToken(userId, fcmToken) {
-        const user = await user_model_1.default.findByIdAndUpdate(userId, { $addToSet: { fcmTokens: fcmToken } }, { new: true });
+        const user = await user_model_1.default.findByIdAndUpdate(userId, { $addToSet: { fcmTokens: fcmToken } }, { returnDocument: "after" });
         if (!user) {
             throw new Error("User not found!!!!!");
         }
@@ -70,9 +75,7 @@ class NotificationService {
                     }
                 });
                 if (invalidTokens.length > 0) {
-                    await user_model_1.default.findByIdAndUpdate(userId, {
-                        $pull: { fcmTokens: { $in: invalidTokens } },
-                    });
+                    await user_model_1.default.findByIdAndUpdate(userId, { $pull: { fcmTokens: { $in: invalidTokens } } });
                 }
             }
             return response;
@@ -89,7 +92,7 @@ class NotificationService {
         return notifications;
     }
     async markAsRead(notificationId, userId) {
-        const notification = await notification_model_1.default.findOneAndUpdate({ _id: notificationId, userId }, { isRead: true }, { new: true });
+        const notification = await notification_model_1.default.findOneAndUpdate({ _id: notificationId, userId }, { isRead: true }, { returnDocument: "after" });
         if (!notification) {
             throw new Error("Notification not found!!!!!");
         }

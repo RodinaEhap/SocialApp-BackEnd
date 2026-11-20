@@ -217,7 +217,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "\r\n{\r\n \"refreshToken\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWUzNWM2Nzg2MzI1MTBhYjVjZDVjYTEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc5MzI4NTMyOCwiZXhwIjoxNzkzODkwMTI4fQ.AITRtJ94XZYvdhe6WulUfEB7AhQvkvk5LRIUC2IdVKA\"\r\n}",
+              "raw": "\r\n{\r\n \"refreshToken\":\"{{accessToken}}\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -244,7 +244,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"idToken\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk0M2EzYTVkN2Q5MTk2MjVhNDU0ZTQ4OWI3NWMyOWFkYWI1N2FjYmEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI0MDc0MDg3MTgxOTIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI0MDc0MDg3MTgxOTIuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTA3MjQ3OTk4NTE4MDQyODc5OTUiLCJlbWFpbCI6InJvZWhhYjU1NTVAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJacnVOZ0NwQWRRZGxGQU0xRER0Y2FBIiwibmFtZSI6IlJvZGluYSBFaGFiIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FDZzhvY0tpOFJaSnNXczBFcHhJdW5RTmNFUUs0cEVoX2FoZktRUmdqUjBIeFpTbkxWV3FNeGZ1PXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6IlJvZGluYSIsImZhbWlseV9uYW1lIjoiRWhhYiIsImlhdCI6MTc5MzI4NDAzMywiZXhwIjoxNzkzMjg3NjMzfQ.RWlus4N1BTaxKjzYCeVb9Lx7LIedl0amLmurAj56nwDRiAjuuyxshXzEv3FvolTKB2uHEMyQ4srhNZSbh-0mzKsW9MZIwfyGU6rE5hUIPBb16oDExkvdmb6UGtqmRlg3jGJA1F6O1CuKQAADlyzleSXhfGMyyRu_VLTc0KIGyNFsstbu1XKCm8_LgGz0r7KjpYtZKsMWXzX8pL5dwQUJ-cHfU_1wIJAnQ8Ox0HyC1E-CuOOwAbhuDrD2NYIV_yf7yznH9uApO40yt3-fYdXVftYc8uYglK98sc4qIgytuxLL5nEjIz0T89W4dGIUuzC8Utn7uw3gAABQbe4ymQWhfQ\"\r\n}",
+              "raw": "{\r\n  \"idToken\": \"{{accessToken}}\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -317,6 +317,43 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fcmToken\": \"{{fcmToken}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -331,7 +368,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWUzNjM1OGQzYzFjOTA1ZWVkMzMxNTEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc5MzI4NzA2NSwiZXhwIjoxNzkzMzczNDY1fQ.oAH93Z1dGUlqXPU4-KXe5DqOewgkg-oA4rxf8Y43Vyo",
+                  "value": "{{accessToken}}",
                   "type": "string"
                 }
               ]
@@ -359,7 +396,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWUzNjM1OGQzYzFjOTA1ZWVkMzMxNTEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc5MzI4NzA2NSwiZXhwIjoxNzkzMzczNDY1fQ.oAH93Z1dGUlqXPU4-KXe5DqOewgkg-oA4rxf8Y43Vyo",
+                  "value": "{{accessToken}}",
                   "type": "string"
                 }
               ]
@@ -396,7 +433,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWUzNjM1OGQzYzFjOTA1ZWVkMzMxNTEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc5MzI4NzA2NSwiZXhwIjoxNzkzMzczNDY1fQ.oAH93Z1dGUlqXPU4-KXe5DqOewgkg-oA4rxf8Y43Vyo",
+                  "value": "{{accessToken}}",
                   "type": "string"
                 }
               ]
@@ -433,7 +470,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWUzNjM1OGQzYzFjOTA1ZWVkMzMxNTEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc5MzI4NzA2NSwiZXhwIjoxNzkzMzczNDY1fQ.oAH93Z1dGUlqXPU4-KXe5DqOewgkg-oA4rxf8Y43Vyo",
+                  "value": "{{accessToken}}",
                   "type": "string"
                 }
               ]
@@ -462,7 +499,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWUzNjM1OGQzYzFjOTA1ZWVkMzMxNTEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc5MzI4NzA2NSwiZXhwIjoxNzkzMzczNDY1fQ.oAH93Z1dGUlqXPU4-KXe5DqOewgkg-oA4rxf8Y43Vyo",
+                  "value": "{{accessToken}}",
                   "type": "string"
                 }
               ]
@@ -496,7 +533,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWUzNjM1OGQzYzFjOTA1ZWVkMzMxNTEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc5MzI4NzA2NSwiZXhwIjoxNzkzMzczNDY1fQ.oAH93Z1dGUlqXPU4-KXe5DqOewgkg-oA4rxf8Y43Vyo",
+                  "value": "{{accessToken}}",
                   "type": "string"
                 }
               ]
@@ -524,7 +561,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWUzNjM1OGQzYzFjOTA1ZWVkMzMxNTEiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc5MzI4NzA2NSwiZXhwIjoxNzkzMzczNDY1fQ.oAH93Z1dGUlqXPU4-KXe5DqOewgkg-oA4rxf8Y43Vyo",
+                  "value": "{{accessToken}}",
                   "type": "string"
                 }
               ]
@@ -545,6 +582,724 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "posts",
+      "item": [
+        {
+          "name": "Create Post",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"My first post\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/posts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Posts",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/posts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Feed Posts",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/posts/feed",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "feed"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Post",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{postId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "{{postId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Post",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Updated post content\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{postId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "{{postId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Like / Unlike Post",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{postId}}/like",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "{{postId}}",
+                "like"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Post",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{postId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "{{postId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "comments",
+      "item": [
+        {
+          "name": "Create Comment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Nice post!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{postId}}/comments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "{{postId}}",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Post Comments",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{postId}}/comments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "{{postId}}",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Comment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/comments/{{commentId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments",
+                "{{commentId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Comment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Updated comment\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments/{{commentId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments",
+                "{{commentId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Comment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/comments/{{commentId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments",
+                "{{commentId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "notifications",
+      "item": [
+        {
+          "name": "Save FCM Token",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fcmToken\": \"{{fcmToken}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/notifications/fcm-token",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications",
+                "fcm-token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove FCM Token",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fcmToken\": \"{{fcmToken}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/notifications/fcm-token",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications",
+                "fcm-token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Notifications",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notifications",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Mark Notification As Read",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notifications/{{notificationId}}/read",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications",
+                "{{notificationId}}",
+                "read"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Mark All Notifications As Read",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notifications/read-all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications",
+                "read-all"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "assets",
+      "item": [
+        {
+          "name": "Upload Single Asset",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/assets/upload",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "assets",
+                "upload"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Presigned Upload URL",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fileName\": \"image.jpg\",\n  \"contentType\": \"image/jpeg\",\n  \"folder\": \"uploads\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/assets/presigned-upload",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "assets",
+                "presigned-upload"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Presigned Download URL",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/assets/presigned-download?key={{fileKey}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "assets",
+                "presigned-download?key={{fileKey}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Asset",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"{{fileKey}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/assets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "assets"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api"
+    },
+    {
+      "key": "accessToken",
+      "value": ""
+    },
+    {
+      "key": "refreshToken",
+      "value": ""
+    },
+    {
+      "key": "fcmToken",
+      "value": ""
+    },
+    {
+      "key": "postId",
+      "value": ""
+    },
+    {
+      "key": "commentId",
+      "value": ""
+    },
+    {
+      "key": "notificationId",
+      "value": ""
+    },
+    {
+      "key": "targetUserId",
+      "value": ""
+    },
+    {
+      "key": "fileKey",
+      "value": ""
     }
   ]
 }

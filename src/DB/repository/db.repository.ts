@@ -11,16 +11,16 @@ export class DBRepository<T> {
     return await this.model.findById(id);
   }
   async findOneAndUpdate(filter: any, update: any) {
-    return await this.model.findOneAndUpdate(filter, update, { new: true });
+    return await this.model.findOneAndUpdate(filter, update, { returnDocument: "after" });
   }
   async findByIdAndUpdate(id: string, update: any) {
-    return await this.model.findByIdAndUpdate(id, update, { new: true });
+    return await this.model.findByIdAndUpdate(id, update, { returnDocument: "after" });
   }
   async softDelete(filter: any) {
     return await this.model.findOneAndUpdate(
       filter,
       { isDeleted: true, deletedAt: new Date() },
-      { new: true },
+      { returnDocument: "after" },
     );
   }
   async forceDelete(filter: any) {

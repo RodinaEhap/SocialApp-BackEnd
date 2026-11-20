@@ -9,6 +9,9 @@ class CommentController {
     createComment = async (req, res) => {
         try {
             const userId = req.user?.userId;
+            if (!userId) {
+                return res.status(401).json({ message: "Unauthorized!!!!!" });
+            }
             const { postId } = req.params;
             const { content } = req.body;
             const result = await comment_service_1.default.createComment(userId, postId, content);
@@ -40,6 +43,9 @@ class CommentController {
     updateComment = async (req, res) => {
         try {
             const userId = req.user?.userId;
+            if (!userId) {
+                return res.status(401).json({ message: "Unauthorized!!!!!" });
+            }
             const { content } = req.body;
             const result = await comment_service_1.default.updateComment(userId, req.params.commentId, content);
             return res.status(200).json(result);
@@ -51,6 +57,9 @@ class CommentController {
     deleteComment = async (req, res) => {
         try {
             const userId = req.user?.userId;
+            if (!userId) {
+                return res.status(401).json({ message: "Unauthorized!!!!!" });
+            }
             const result = await comment_service_1.default.deleteComment(userId, req.params.commentId);
             return res.status(200).json(result);
         }

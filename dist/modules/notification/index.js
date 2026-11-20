@@ -17,9 +17,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.commentController = void 0;
+exports.notificationController = void 0;
 var notification_controller_1 = require("./notification.controller");
-Object.defineProperty(exports, "commentController", { enumerable: true, get: function () { return __importDefault(notification_controller_1).default; } });
+Object.defineProperty(exports, "notificationController", { enumerable: true, get: function () { return __importDefault(notification_controller_1).default; } });
 __exportStar(require("./notification.router"), exports);
 __exportStar(require("./notification.service"), exports);
 __exportStar(require("./notification.dto"), exports);

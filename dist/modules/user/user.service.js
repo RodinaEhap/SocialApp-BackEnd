@@ -21,7 +21,7 @@ class UserService {
     };
     updateProfile = async (userId, data) => {
         const user = await user_model_1.default.findByIdAndUpdate(userId, data, {
-            new: true,
+            returnDocument: "after",
         }).select("-password");
         if (!user) {
             throw new Error("User not found!");

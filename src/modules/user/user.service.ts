@@ -21,7 +21,7 @@ export class UserService {
     data: { username?: string; phone?: string },
   ) => {
     const user = await User.findByIdAndUpdate(userId, data, {
-      new: true,
+      returnDocument: "after",
     }).select("-password");
     if (!user) {
       throw new Error("User not found!");

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import commentController from "./comment.controller";
 import { authMiddleware } from "../../middleware";
-const router = Router({ mergeParams: true }); 
+const router = Router({ mergeParams: true });
 router.post(
   "/:postId/comments",
   authMiddleware,

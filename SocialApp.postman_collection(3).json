@@ -1,0 +1,1832 @@
+{
+  "info": {
+    "_postman_id": "socialapp-complete-v3",
+    "name": "SocialApp - Complete Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52882823",
+    "_collection_link": "https://go.postman.co/collection/52882823-37ddae6b-b565-4c22-aecd-ce2fd9994c59?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signup",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"Rodina New\",\n  \"email\": \"test@example.com\",\n  \"password\": \"Password123!\",\n  \"confirmPassword\": \"Password123!\",\n  \"phone\": \"01012345678\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/signup",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "signup"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Confirm Email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"otp\": \"{{otp}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/confirm-email",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "confirm-email"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"Password123!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/refresh-token",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "refresh-token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Forgot Password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/forgot-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "forgot-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"otp\": \"{{resetOtp}}\",\n  \"password\": \"NewPassword123!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/reset-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "reset-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Google Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idToken\": \"{{googleIdToken}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/google-login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "google-login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fcmToken\": \"{{fcmToken}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get Profile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Profile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"Rodina Updated\",\n  \"phone\": \"01099999999\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/update-profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "update-profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change Password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oldPassword\": \"Password123!\",\n  \"password\": \"NewPassword123!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/change-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "change-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Follow / Unfollow User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/follow/{{targetUserId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "follow",
+                "{{targetUserId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Users",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/search?keyword=Rodina",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "Rodina"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User Suggestions",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/suggestions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "suggestions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Privacy Control",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/privacy",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "privacy"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Profile Image",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "{{filePath}}"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/profile-image",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users",
+                "profile-image"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "Create Post",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"My first post\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/posts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Posts",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/posts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Feed Posts",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/posts/feed",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "feed"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Post",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{postId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "{{postId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Post",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Updated post content\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{postId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "{{postId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Like / Unlike Post",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{postId}}/like",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "{{postId}}",
+                "like"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Post",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{postId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "{{postId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Comments",
+      "item": [
+        {
+          "name": "Create Comment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Nice post!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{postId}}/comments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "{{postId}}",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Post Comments",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/posts/{{postId}}/comments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "{{postId}}",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Comment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/comments/{{commentId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments",
+                "{{commentId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Comment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Updated comment\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comments/{{commentId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments",
+                "{{commentId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Comment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/comments/{{commentId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comments",
+                "{{commentId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "Save FCM Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fcmToken\": \"{{fcmToken}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/notifications/fcm-token",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications",
+                "fcm-token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove FCM Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fcmToken\": \"{{fcmToken}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/notifications/fcm-token",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications",
+                "fcm-token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Notifications",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notifications",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Mark Notification As Read",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notifications/{{notificationId}}/read",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications",
+                "{{notificationId}}",
+                "read"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Mark All Notifications As Read",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/notifications/read-all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "notifications",
+                "read-all"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Assets",
+      "item": [
+        {
+          "name": "Upload Single Asset",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "{{filePath}}"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/assets/upload",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "assets",
+                "upload"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Presigned Upload",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fileName\": \"image.jpg\",\n  \"contentType\": \"image/jpeg\",\n  \"folder\": \"uploads\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/assets/presigned-upload",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "assets",
+                "presigned-upload"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Presigned Download",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/assets/presigned-download?key={{fileKey}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "assets",
+                "presigned-download"
+              ],
+              "query": [
+                {
+                  "key": "key",
+                  "value": "{{fileKey}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Asset",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Request completed', function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 400, 401, 404]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"{{fileKey}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/assets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "assets"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api",
+      "type": "string"
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "refreshToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "otp",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "resetOtp",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "googleIdToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "fcmToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "targetUserId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "postId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "commentId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "notificationId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "fileKey",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "filePath",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

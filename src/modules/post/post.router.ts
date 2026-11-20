@@ -1,5 +1,6 @@
 import { Router } from "express";
-import postController from "./post.controller";import { authMiddleware, uploadCloud } from "../../middleware";
+import postController from "./post.controller";
+import { authMiddleware, uploadCloud } from "../../middleware";
 const router = Router();
 router.post(
   "/",

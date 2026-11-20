@@ -9,6 +9,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const hash_1 = require("../../common/utlis/hash");
 const google_auth_library_1 = require("google-auth-library");
 const notification_service_1 = __importDefault(require("../notification/notification.service"));
+const environment_1 = require("../../common/utlis/environment");
 const client = new google_auth_library_1.OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 class AuthenticationService {
     constructor() { }
@@ -62,17 +63,17 @@ class AuthenticationService {
         if (!isMatch) {
             throw new Error("Invalid email or password!");
         }
-        const accessToken = jsonwebtoken_1.default.sign({ userId: user._id, role: user.role }, process.env.TOKEN_SIGNIN_SECRET_KEY || "access_secret", { expiresIn: "1d" });
-        const refreshToken = jsonwebtoken_1.default.sign({ userId: user._id, role: user.role }, process.env.REFRESH_TOKEN_SECRET_KEY || "refresh_secret", { expiresIn: "7d" });
+        const accessToken = jsonwebtoken_1.default.sign({ userId: user._id, role: user.role }, (0, environment_1.getRequiredEnv)("TOKEN_SIGNIN_SECRET_KEY"), { expiresIn: "1d" });
+        const refreshToken = jsonwebtoken_1.default.sign({ userId: user._id, role: user.role }, (0, environment_1.getRequiredEnv)("REFRESH_TOKEN_SECRET_KEY"), { expiresIn: "7d" });
         return { message: "Logged in successfully", accessToken, refreshToken };
     };
     refreshToken = async (token) => {
         if (!token) {
             throw new Error("Refresh token is required!");
         }
-        const secretKey = process.env.REFRESH_TOKEN_SECRET_KEY || "refresh_secret";
+        const secretKey = (0, environment_1.getRequiredEnv)("REFRESH_TOKEN_SECRET_KEY");
         const decoded = jsonwebtoken_1.default.verify(token, secretKey);
-        const accessToken = jsonwebtoken_1.default.sign({ userId: decoded.userId, role: decoded.role }, process.env.TOKEN_SIGNIN_SECRET_KEY || "access_secret", { expiresIn: "1d" });
+        const accessToken = jsonwebtoken_1.default.sign({ userId: decoded.userId, role: decoded.role }, (0, environment_1.getRequiredEnv)("TOKEN_SIGNIN_SECRET_KEY"), { expiresIn: "1d" });
         return { message: "Token refreshed successfully!", accessToken };
     };
     forgotPassword = async (data) => {
@@ -132,8 +133,8 @@ class AuthenticationService {
                 phone: "00000000000",
             });
         }
-        const accessToken = jsonwebtoken_1.default.sign({ userId: user._id, role: user.role }, process.env.TOKEN_SIGNIN_SECRET_KEY || "access_secret", { expiresIn: "1d" });
-        const refreshToken = jsonwebtoken_1.default.sign({ userId: user._id, role: user.role }, process.env.REFRESH_TOKEN_SECRET_KEY || "refresh_secret", { expiresIn: "7d" });
+        const accessToken = jsonwebtoken_1.default.sign({ userId: user._id, role: user.role }, (0, environment_1.getRequiredEnv)("TOKEN_SIGNIN_SECRET_KEY"), { expiresIn: "1d" });
+        const refreshToken = jsonwebtoken_1.default.sign({ userId: user._id, role: user.role }, (0, environment_1.getRequiredEnv)("REFRESH_TOKEN_SECRET_KEY"), { expiresIn: "7d" });
         return { message: "Google login successful", accessToken, refreshToken };
     };
     logout = async (userId, fcmToken) => {

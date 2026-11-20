@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { comparePassword, hashPassword } from "../../common/utlis/hash";
 import { OAuth2Client } from "google-auth-library";
 import notificationService from "../notification/notification.service";
+import { getRequiredEnv } from "../../common/utlis/environment";
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 export class AuthenticationService {
   constructor() {}
@@ -67,13 +68,13 @@ export class AuthenticationService {
     }
     const accessToken = jwt.sign(
       { userId: user._id, role: user.role },
-      process.env.TOKEN_SIGNIN_SECRET_KEY || "access_secret",
+      getRequiredEnv("TOKEN_SIGNIN_SECRET_KEY"),
       { expiresIn: "1d" },
     );
 
     const refreshToken = jwt.sign(
       { userId: user._id, role: user.role },
-      process.env.REFRESH_TOKEN_SECRET_KEY || "refresh_secret",
+      getRequiredEnv("REFRESH_TOKEN_SECRET_KEY"),
       { expiresIn: "7d" },
     );
 
@@ -83,7 +84,7 @@ export class AuthenticationService {
     if (!token) {
       throw new Error("Refresh token is required!");
     }
-    const secretKey = process.env.REFRESH_TOKEN_SECRET_KEY || "refresh_secret";
+    const secretKey = getRequiredEnv("REFRESH_TOKEN_SECRET_KEY");
 
     const decoded = jwt.verify(token, secretKey) as unknown as {
       userId: string;
@@ -92,7 +93,7 @@ export class AuthenticationService {
 
     const accessToken = jwt.sign(
       { userId: decoded.userId, role: decoded.role },
-      process.env.TOKEN_SIGNIN_SECRET_KEY || "access_secret",
+      getRequiredEnv("TOKEN_SIGNIN_SECRET_KEY"),
       { expiresIn: "1d" },
     );
 
@@ -168,13 +169,13 @@ export class AuthenticationService {
     }
     const accessToken = jwt.sign(
       { userId: user._id, role: user.role },
-      process.env.TOKEN_SIGNIN_SECRET_KEY || "access_secret",
+      getRequiredEnv("TOKEN_SIGNIN_SECRET_KEY"),
       { expiresIn: "1d" },
     );
 
     const refreshToken = jwt.sign(
       { userId: user._id, role: user.role },
-      process.env.REFRESH_TOKEN_SECRET_KEY || "refresh_secret",
+      getRequiredEnv("REFRESH_TOKEN_SECRET_KEY"),
       { expiresIn: "7d" },
     );
 

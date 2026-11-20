@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.authMiddleware = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_model_1 = __importDefault(require("../DB/model/user.model"));
+const environment_1 = require("../common/utlis/environment");
 const authMiddleware = async (req, res, next) => {
     try {
         const authHeader = req.headers.authorization;
@@ -20,7 +21,7 @@ const authMiddleware = async (req, res, next) => {
             res.status(401).json({ message: "Access denied. Token missing!!!!!" });
             return;
         }
-        const secretKey = process.env.TOKEN_SIGNIN_SECRET_KEY || "access_secret";
+        const secretKey = (0, environment_1.getRequiredEnv)("TOKEN_SIGNIN_SECRET_KEY");
         const decoded = jsonwebtoken_1.default.verify(token, secretKey);
         const user = await user_model_1.default.findById(decoded.userId);
         if (!user) {

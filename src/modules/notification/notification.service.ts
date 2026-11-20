@@ -7,7 +7,16 @@ const initFirebase = () => {
   const projectId = process.env.FIREBASE_PROJECT_ID;
   const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
   const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n");
-  if (!projectId || !clientEmail || !privateKey) {
+  const values = [projectId, clientEmail, privateKey];
+  const hasPlaceholder = values.some((value) =>
+    value?.includes("your_") || value?.includes("-----BEGIN PRIVATE KEY-----\n...")
+  );
+  if (
+    !projectId ||
+    !clientEmail ||
+    !privateKey ||
+    hasPlaceholder
+  ) {
     console.warn(
       "Firebase credentials missing in .env! Push notifications disabled.",
     );
@@ -27,7 +36,7 @@ export class NotificationService {
     const user = await User.findByIdAndUpdate(
       userId,
       { $addToSet: { fcmTokens: fcmToken } },
-      { new: true },
+      { returnDocument: "after" },
     );
     if (!user) {
       throw new Error("User not found!!!!!");
@@ -76,9 +85,10 @@ export class NotificationService {
           }
         });
         if (invalidTokens.length > 0) {
-          await User.findByIdAndUpdate(userId, {
-            $pull: { fcmTokens: { $in: invalidTokens } },
-          });
+          await User.findByIdAndUpdate(
+            userId,
+            { $pull: { fcmTokens: { $in: invalidTokens } } },
+          );
         }
       }
       return response;
@@ -97,7 +107,7 @@ export class NotificationService {
     const notification = await Notification.findOneAndUpdate(
       { _id: notificationId, userId },
       { isRead: true },
-      { new: true },
+      { returnDocument: "after" },
     );
     if (!notification) {
       throw new Error("Notification not found!!!!!");

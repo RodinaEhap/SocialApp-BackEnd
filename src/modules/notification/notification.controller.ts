@@ -19,6 +19,24 @@ export class NotificationController {
         .json({ message: error.message || "Something went wrong!" });
     }
   };
+  removeFcmToken = async (req: Request, res: Response) => {
+    try {
+      const userId = req.user?.userId;
+      if (!userId) {
+        return res.status(401).json({ message: "Unauthorized!!!!!" });
+      }
+      const { fcmToken } = req.body;
+      if (!fcmToken) {
+        return res.status(400).json({ message: "FCM Token is required!!!!!" });
+      }
+      const result = await notificationService.removeFcmToken(userId, fcmToken);
+      return res.status(200).json({ message: "Success", result });
+    } catch (error: any) {
+      return res
+        .status(400)
+        .json({ message: error.message || "Something went wrong!" });
+    }
+  };
   getUserNotifications = async (req: Request, res: Response) => {
     try {
       const userId = req.user?.userId;
@@ -41,6 +59,20 @@ export class NotificationController {
       }
       const { id } = req.params;
       const result = await notificationService.markAsRead(id as string, userId);
+      return res.status(200).json({ message: "Success", result });
+    } catch (error: any) {
+      return res
+        .status(400)
+        .json({ message: error.message || "Something went wrong!" });
+    }
+  };
+  markAllAsRead = async (req: Request, res: Response) => {
+    try {
+      const userId = req.user?.userId;
+      if (!userId) {
+        return res.status(401).json({ message: "Unauthorized!!!!!" });
+      }
+      const result = await notificationService.markAllAsRead(userId);
       return res.status(200).json({ message: "Success", result });
     } catch (error: any) {
       return res
