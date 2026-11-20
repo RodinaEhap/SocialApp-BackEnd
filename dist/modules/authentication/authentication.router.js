@@ -45,6 +45,7 @@ const authentication_controller_2 = __importDefault(require("./authentication.co
 const router = (0, express_1.Router)();
 router.post("/signup", (0, middleware_1.validationMiddleware)(validators.signup(enum_1.languageEnum.EN)), authentication_controller_1.default.signup);
 router.post("/confirm-email", (0, middleware_1.validationMiddleware)(validators.confirmEmail(enum_1.languageEnum.EN)), authentication_controller_1.default.confirmEmail);
+router.post("/resend-confirm-email", (0, middleware_1.validationMiddleware)(validators.resendConfirmEmail(enum_1.languageEnum.EN)), authentication_controller_1.default.resendConfirmEmail);
 router.post("/login", (0, middleware_1.validationMiddleware)(validators.login(enum_1.languageEnum.EN)), authentication_controller_1.default.login);
 router.post("/refresh-token", (0, middleware_1.validationMiddleware)(validators.refreshToken(enum_1.languageEnum.EN)), authentication_controller_1.default.refreshToken);
 router.post("/forgot-password", (0, middleware_1.validationMiddleware)(validators.forgotPassword(enum_1.languageEnum.EN)), authentication_controller_1.default.forgotPassword);

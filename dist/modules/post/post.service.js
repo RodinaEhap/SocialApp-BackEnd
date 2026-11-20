@@ -8,6 +8,7 @@ const post_model_1 = require("../../DB/model/post.model");
 const user_model_1 = __importDefault(require("../../DB/model/user.model"));
 const notification_service_1 = __importDefault(require("../notification/notification.service"));
 const s3_service_1 = __importDefault(require("../S3/s3.service"));
+const comment_model_1 = require("../../DB/model/comment.model");
 class PostService {
     createPost = async (userId, data, file) => {
         if (file) {
@@ -86,6 +87,7 @@ class PostService {
             throw new Error("Unauthorized! You can only delete your own post.");
         }
         await post_model_1.Post.findByIdAndUpdate(postId, { isDeleted: true });
+        await comment_model_1.Comment.deleteMany({ postId });
         return { message: "Post deleted successfully" };
     };
 }

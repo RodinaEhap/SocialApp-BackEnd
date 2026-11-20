@@ -18,7 +18,6 @@ app.use("/api/auth", authRouter);
 app.use("/api/notifications", notificationRouter);
 app.use("/api/assets", assetsRouter);
 app.use("/api/posts", postRouter);
-app.use("/api/posts", commentRouter);
 app.use("/api/comments", commentRouter);
 
 app.get("/", (req: Request, res: Response) => {

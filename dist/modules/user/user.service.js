@@ -79,7 +79,7 @@ class UserService {
     searchUsers = async (keyword) => {
         const users = await user_model_1.default.find({
             username: { $regex: keyword, $options: "i" },
-        }).select("username email profilePicture");
+        }).select("username email profileImage");
         return {
             message: "Success",
             results: users,
@@ -94,7 +94,7 @@ class UserService {
         const suggestions = await user_model_1.default.find({
             _id: { $nin: [...followingList, currentUserId] },
         })
-            .select("username email profilePicture")
+            .select("username email profileImage")
             .limit(5);
         return {
             message: "Success",

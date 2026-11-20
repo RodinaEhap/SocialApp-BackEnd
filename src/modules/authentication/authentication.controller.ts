@@ -24,6 +24,17 @@ export class AuthenticationController {
     }
   };
 
+  resendConfirmEmail = async (req: Request, res: Response) => {
+    try {
+      const result = await authenticationService.resendConfirmEmail(req.body);
+      return res.status(200).json(result);
+    } catch (error: any) {
+      return res
+        .status(400)
+        .json({ message: error.message || "Something went wrong!" });
+    }
+  };
+
   login = async (req: Request, res: Response) => {
     try {
       const result = await authenticationService.login(req.body);

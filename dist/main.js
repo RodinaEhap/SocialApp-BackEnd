@@ -21,7 +21,6 @@ app.use("/api/auth", authentication_router_1.default);
 app.use("/api/notifications", notification_router_1.default);
 app.use("/api/assets", asset_router_1.default);
 app.use("/api/posts", post_router_1.default);
-app.use("/api/posts", comment_router_1.default);
 app.use("/api/comments", comment_router_1.default);
 app.get("/", (req, res) => {
     res.json({ message: "Server is running successfully!" });

@@ -2,6 +2,7 @@ import { Post } from "../../DB/model/post.model";
 import User from "../../DB/model/user.model";
 import notificationService from "../notification/notification.service";
 import s3Service from "../S3/s3.service";
+import { Comment } from "../../DB/model/comment.model";
 export class PostService {
   createPost = async (
     userId: string,
@@ -93,6 +94,7 @@ export class PostService {
       throw new Error("Unauthorized! You can only delete your own post.");
     }
     await Post.findByIdAndUpdate(postId, { isDeleted: true });
+    await Comment.deleteMany({ postId });
     return { message: "Post deleted successfully" };
   };
 }

@@ -28,6 +28,17 @@ class AuthenticationController {
                 .json({ message: error.message || "Something went wrong!" });
         }
     };
+    resendConfirmEmail = async (req, res) => {
+        try {
+            const result = await authentication_service_1.default.resendConfirmEmail(req.body);
+            return res.status(200).json(result);
+        }
+        catch (error) {
+            return res
+                .status(400)
+                .json({ message: error.message || "Something went wrong!" });
+        }
+    };
     login = async (req, res) => {
         try {
             const result = await authentication_service_1.default.login(req.body);

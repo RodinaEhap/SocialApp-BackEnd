@@ -10,9 +10,29 @@ const hash_1 = require("../../common/utlis/hash");
 const google_auth_library_1 = require("google-auth-library");
 const notification_service_1 = __importDefault(require("../notification/notification.service"));
 const environment_1 = require("../../common/utlis/environment");
+const send_email_1 = require("../../common/utlis/send-email");
 const client = new google_auth_library_1.OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 class AuthenticationService {
     constructor() { }
+    resendConfirmEmail = async (data) => {
+        const user = await user_model_1.default.findOne({ email: data.email });
+        if (!user) {
+            throw new Error("User not found!");
+        }
+        if (user.confirmEmail) {
+            throw new Error("Email already confirmed!");
+        }
+        const otp = Math.floor(100000 + Math.random() * 900000).toString();
+        user.otp = otp;
+        user.otpExpireTime = new Date(Date.now() + 10 * 60 * 1000);
+        await user.save();
+        await (0, send_email_1.sendEmail)({
+            to: data.email,
+            subject: "Confirm your SocialApp account",
+            html: `<h2>SocialApp Email Confirmation</h2><p>Your new OTP code is: <strong>${otp}</strong></p>`,
+        });
+        return { message: "Confirmation OTP sent successfully" };
+    };
     signup = async (data) => {
         console.log("FULL DATA RECEIVED IN SERVICE:", data);
         const username = data.username || data.email?.split("@")[0] || "User";
@@ -30,7 +50,11 @@ class AuthenticationService {
             otp,
             confirmEmail: false,
         }));
-        console.log("Generated OTP for testing:", otp);
+        await (0, send_email_1.sendEmail)({
+            to: data.email,
+            subject: "Confirm your SocialApp account",
+            html: `<h2>SocialApp Email Confirmation</h2><p>Your OTP code is: <strong>${otp}</strong></p>`,
+        });
         return {
             message: "User registered successfully. Please check your email/OTP to confirm.",
             userId: newUser._id,
@@ -87,7 +111,11 @@ class AuthenticationService {
         user.otp = otp;
         user.otpExpireTime = otpExpireTime;
         await user.save();
-        console.log("Generated Forgot Password OTP for testing:", otp);
+        await (0, send_email_1.sendEmail)({
+            to: email,
+            subject: "Reset your SocialApp password",
+            html: `<h2>SocialApp Password Reset</h2><p>Your OTP code is: <strong>${otp}</strong></p><p>This code expires in 10 minutes.</p>`,
+        });
         return {
             message: "OTP sent to your email successfully. Please check it to reset password.",
         };

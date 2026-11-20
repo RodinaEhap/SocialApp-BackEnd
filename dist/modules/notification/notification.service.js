@@ -15,11 +15,9 @@ const initFirebase = () => {
     const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
     const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n");
     const values = [projectId, clientEmail, privateKey];
-    const hasPlaceholder = values.some((value) => value?.includes("your_") || value?.includes("-----BEGIN PRIVATE KEY-----\n..."));
-    if (!projectId ||
-        !clientEmail ||
-        !privateKey ||
-        hasPlaceholder) {
+    const hasPlaceholder = values.some((value) => value?.includes("your_") ||
+        value?.includes("-----BEGIN PRIVATE KEY-----\n..."));
+    if (!projectId || !clientEmail || !privateKey || hasPlaceholder) {
         console.warn("Firebase credentials missing in .env! Push notifications disabled.");
         return false;
     }
@@ -75,7 +73,9 @@ class NotificationService {
                     }
                 });
                 if (invalidTokens.length > 0) {
-                    await user_model_1.default.findByIdAndUpdate(userId, { $pull: { fcmTokens: { $in: invalidTokens } } });
+                    await user_model_1.default.findByIdAndUpdate(userId, {
+                        $pull: { fcmTokens: { $in: invalidTokens } },
+                    });
                 }
             }
             return response;

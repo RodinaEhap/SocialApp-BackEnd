@@ -5,9 +5,29 @@ import { comparePassword, hashPassword } from "../../common/utlis/hash";
 import { OAuth2Client } from "google-auth-library";
 import notificationService from "../notification/notification.service";
 import { getRequiredEnv } from "../../common/utlis/environment";
+import { sendEmail } from "../../common/utlis/send-email";
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 export class AuthenticationService {
   constructor() {}
+  resendConfirmEmail = async (data: { email: string }) => {
+    const user = await User.findOne({ email: data.email });
+    if (!user) {
+      throw new Error("User not found!");
+    }
+    if (user.confirmEmail) {
+      throw new Error("Email already confirmed!");
+    }
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    user.otp = otp;
+    user.otpExpireTime = new Date(Date.now() + 10 * 60 * 1000);
+    await user.save();
+    await sendEmail({
+      to: data.email,
+      subject: "Confirm your SocialApp account",
+      html: `<h2>SocialApp Email Confirmation</h2><p>Your new OTP code is: <strong>${otp}</strong></p>`,
+    });
+    return { message: "Confirmation OTP sent successfully" };
+  };
   signup = async (data: ISignupDto) => {
     console.log("FULL DATA RECEIVED IN SERVICE:", data);
     const username = data.username || data.email?.split("@")[0] || "User";
@@ -27,7 +47,11 @@ export class AuthenticationService {
       confirmEmail: false,
     })) as any;
 
-    console.log("Generated OTP for testing:", otp);
+    await sendEmail({
+      to: data.email,
+      subject: "Confirm your SocialApp account",
+      html: `<h2>SocialApp Email Confirmation</h2><p>Your OTP code is: <strong>${otp}</strong></p>`,
+    });
 
     return {
       message:
@@ -110,7 +134,11 @@ export class AuthenticationService {
     user.otp = otp;
     user.otpExpireTime = otpExpireTime;
     await user.save();
-    console.log("Generated Forgot Password OTP for testing:", otp);
+    await sendEmail({
+      to: email,
+      subject: "Reset your SocialApp password",
+      html: `<h2>SocialApp Password Reset</h2><p>Your OTP code is: <strong>${otp}</strong></p><p>This code expires in 10 minutes.</p>`,
+    });
     return {
       message:
         "OTP sent to your email successfully. Please check it to reset password.",

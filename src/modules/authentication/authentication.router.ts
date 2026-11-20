@@ -19,6 +19,12 @@ router.post(
 );
 
 router.post(
+  "/resend-confirm-email",
+  validationMiddleware(validators.resendConfirmEmail(languageEnum.EN)),
+  authController.resendConfirmEmail,
+);
+
+router.post(
   "/login",
   validationMiddleware(validators.login(languageEnum.EN)),
   authController.login,
